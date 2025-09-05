@@ -40,11 +40,11 @@ $(function () {
 
 
     // TODO 3 - Create Collectables
-  createCollectable("database", 500 ,300, 0.5,1);
-  createCollectable("database", 700 ,300, 0.5,1);
-   createCollectable("database", 300 ,600, 0.5,1);
-   createCollectable("database", 900 ,600, 0.5,1);
-   createCollectable("database", 900 ,300, 0.5,1);
+  createCollectable("Peach", 500 ,300, 0.5,1);
+  createCollectable("Apple", 700 ,300, 0.5,1);
+   createCollectable("Plum", 300 ,600, 0.5,1);
+   createCollectable("Pear", 900 ,600, 0.5,1);
+   createCollectable("Banana", 900 ,300, 0.5,1);
 
 
     
