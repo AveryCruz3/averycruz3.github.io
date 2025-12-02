@@ -30,7 +30,7 @@ var background = function (window) {
         //////////////////////////////////////////////////////////////////
         // TODO (several):
         var tree;
-      
+        var buildings = [];
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
         function render() {
@@ -60,7 +60,16 @@ var background = function (window) {
 
 
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            
+           // creats a loop
+            for (var i = 0; i < 5; ++i) {
+                var buildingColors = ["Red", "orange", "pink", "black", "lightBlue"]
+                var buildingHeight = 300 * Math.random(); // buildings hieght stores the vlause of it
+                var building = draw.rect(75, buildingHeight, buildingColors[i], "Black", 1); // drawas a rectangle and uses 75 as the width, bildingHeight, light grey as the color, black as the outline
+                building.x = 300 * i; // give it an X value
+                building.y = groundY - buildingHeight; // Y valuse givien and it subacts so it gose up from the ground
+                background.addChild(building); // take the bulding object and adds it to teh background so it is visible
+                buildings.push(building); // take the bulding and pushes it to the bilidings array
+            }
             
             // TODO 3: Part 1 - Add a tree
             tree = draw.bitmap("img/tree.png"); // creates a bitmap objact using the tree imageansd stores it in the varible tree
@@ -82,13 +91,24 @@ var background = function (window) {
             // TODO 3: Part 2 - Move the tree!
             tree.x = tree.x - 1; // makes the tree move towards the left by subreactiong from its current X posistion
 
-            // checks if the theee has gone off the left and resets it to the right
+            // checks if the tree has gone off the left and resets it to the right
             if (tree.x < -200) {
                 tree.x = canvasWidth;
             }
             
             // TODO 4: Part 2 - Parallax
-            
+            // pulls a bilding and asigns it to the buildings array and taks the x value and subtracta 1 to move it to the left
+            for (var i = 0; i < buildings.length; i++) {
+                 var building = buildings[i];
+                building.x -= 1; 
+                if(building.x < -200){
+                    building.x = canvasWidth; // checks if it has moved off the leftand resets it to the right side of the screen
+                }
+            }
+
+
+
+
 
         } // end of update function - DO NOT DELETE
         
