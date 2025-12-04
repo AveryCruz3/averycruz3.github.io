@@ -20,20 +20,22 @@ var runLevels = function (window) {
     // BEGIN EDITING YOUR CODE HERE
     
 
-    function createObstacle(x, y, damage){
-      var hitZoneSize = 25;
+    function createObstacle(x, y, damage, rotation, hitZone, image, offsetX, offsetY){
+      var hitZoneSize = hitZone;
       var damageFromObstacle = damage;
       var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
       obstacleHitZone.x = x; // sets the x position
       obstacleHitZone.y = groundY - y; // sets the y position
       game.addGameItem(obstacleHitZone); // adds obstacles hitbox to the game
-      var obstacleImage = draw.bitmap("img/sawblade.png"); // draws the saw blade image as a bitmap and storse it to obstableImage
+      var obstacleImage = draw.bitmap("img/spikes.png"); // draws the saw blade image as a bitmap and storse it to obstableImage
       obstacleHitZone.addChild(obstacleImage); // takes the image and adds it to attaches to your hitzone
-      obstacleImage.x = -25; // oofsets the sprite from the hitzone to make sure the hitzone is centered
-      obstacleImage.y = -25; // oofsets the sprite from the hitzone to make sure the hitzone is centered
-   
-      obstacleHitZone.rotationalVelocity = 10;
-   
+      obstacleImage.x = offsetX; // oofsets the sprite from the hitzone to make sure the hitzone is centered
+      obstacleImage.y = offsetY; // oofsets the sprite from the hitzone to make sure the hitzone is centered
+      obstacleImage.scaleX = 0.05;
+      obstacleImage.scaleY = 0.05;
+
+      obstacleHitZone.rotationalVelocity = rotation;
+      
     }
 
    
@@ -67,9 +69,7 @@ var runLevels = function (window) {
         //enemy.flyTo(0, 0);
       };
     }
-    createEnemy(400, groundY - 50);
-    createEnemy(600, groundY - 50);
-    createEnemy(800, groundY - 50);
+   
 
     function createReward(x, y){
       var reward = game.createGameItem("reward", 25); // crates reward game items with a hitboxof 25 and stores it in the enem varitable
@@ -96,9 +96,7 @@ var runLevels = function (window) {
       };
     }
 
-    createReward(500, groundY - 50);
-    createReward(700, groundY - 50);
-    createReward(900, groundY - 50);
+    
 
 
     function createLevelMarker(x, y){
@@ -127,7 +125,7 @@ var runLevels = function (window) {
       };
     }
 
-    createLevelMarker(1000, groundY - 50);
+    
 
     function startLevel() {
       // TODO 13 goes below here
@@ -139,15 +137,19 @@ var runLevels = function (window) {
 
 
         if(element.type === "obstacle"){
-            createObstacle(element.x, element.y, element.damage);
+            createObstacle(element.x, element.y, element.damage, element.rotation, element.hitZone, element.image);
         }
 
         if(element.type === "enemy"){
-            createEnemy(element.x, element.y, element.damage);
+            createEnemy(element.x, element.y);
         }
 
         if(element.type === "reward"){
-            createReward(element.x, element.y, element.damage);
+            createReward(element.x, element.y);
+        }
+
+         if(element.type === "levelMarker"){
+            createLevelMarker(element.x, element.y);
         }
 
       }
