@@ -20,19 +20,19 @@ var runLevels = function (window) {
     // BEGIN EDITING YOUR CODE HERE
     
 
-    function createObstacle(x, y, damage, rotation, hitZone, image, offsetX, offsetY){
+    function createObstacle(x, y, damage, rotation, hitZone, offsetX, offsetY, scaleX, scaleY){
       var hitZoneSize = hitZone;
       var damageFromObstacle = damage;
       var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
       obstacleHitZone.x = x; // sets the x position
-      obstacleHitZone.y = groundY - y; // sets the y position
+      obstacleHitZone.y = y; // sets the y position
       game.addGameItem(obstacleHitZone); // adds obstacles hitbox to the game
       var obstacleImage = draw.bitmap("img/spikes.png"); // draws the saw blade image as a bitmap and storse it to obstableImage
       obstacleHitZone.addChild(obstacleImage); // takes the image and adds it to attaches to your hitzone
       obstacleImage.x = offsetX; // oofsets the sprite from the hitzone to make sure the hitzone is centered
       obstacleImage.y = offsetY; // oofsets the sprite from the hitzone to make sure the hitzone is centered
-      obstacleImage.scaleX = 0.05;
-      obstacleImage.scaleY = 0.05;
+      obstacleImage.scaleX = scaleX;
+      obstacleImage.scaleY = scaleY;
 
       obstacleHitZone.rotationalVelocity = rotation;
       
@@ -137,7 +137,7 @@ var runLevels = function (window) {
 
 
         if(element.type === "obstacle"){
-            createObstacle(element.x, element.y, element.damage, element.rotation, element.hitZone, element.image);
+            createObstacle(element.x, element.y, element.damage, element.rotation, element.hitZone, element.offsetX, element.offsetY, element.scaleX, element.scaleY);
         }
 
         if(element.type === "enemy"){
